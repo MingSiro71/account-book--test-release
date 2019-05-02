@@ -1,0 +1,37 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+:root{
+--main-bg-collor: #09306d;
+--main-font-collor: #333;
+--inverse-font-collor: white;
+}
+
+/* universal */
+
+body {
+  padding-top: 60px;
+}
+section {
+  overflow: auto;
+}
+textarea {
+  resize: vertical;
+}
+.center {
+  text-align: center;
+}
+.center h1 {
+  margin-bottom: 10px;
+}
+
+
+/* footer */
+footer{
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: var(--main-bg-collor);
+  color: var(--inverse-font-collor);
+}
