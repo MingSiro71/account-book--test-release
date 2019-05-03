@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+
   def setup
     @user = users(:testman) # you should keep "testman" in "fixture/users.yml".
+    @user.password = 'password'
+    @user.password_confirmation = 'password'
   end
 
   test "should be valid" do
@@ -59,4 +62,20 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_equal "foo@example.com", @user.reload.email
   end
+
+  test "password should be present" do
+    @user.password = "  "
+    assert_not @user.valid?
+  end
+
+  test "password should have a minimum length" do
+    @user.password = "pass"
+    assert_not @user.valid?
+  end
+
+  test "password_confirmation should be the same to password" do
+    @user.password_confirmation = "passwodd"
+    assert_not @user.valid?
+  end
+
 end
