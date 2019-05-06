@@ -27,5 +27,6 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'static_pages/home'
     assert_select 'div', "メールアドレスにアカウント本登録用のurlを送信しました"
+    assert is_logged_in?
   end
 end
