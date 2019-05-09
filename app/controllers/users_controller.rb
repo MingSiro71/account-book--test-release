@@ -6,9 +6,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "メールアドレスにアカウント本登録用のurlを送信しました"
-      redirect_to controller: 'static_pages', action: 'home'
+#      UserMailer.account_activation(@user).deliver_now
+      @user.send_activation_email
+      flash[:info] = "アカウント有効化メールを送りました、メールを確認してください"
+      redirect_to root_url
     else
       render 'new'
     end

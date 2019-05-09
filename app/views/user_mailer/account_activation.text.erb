@@ -1,0 +1,6 @@
+こんにちは、<%= @user.name %>さん
+
+Account Book を始めるために、アカウントを有効化しましょう！
+以下のurlをクリックするとアカウントが有効化されます。
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
