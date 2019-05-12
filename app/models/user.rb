@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :divisions
+
   attr_accessor :remember_token, :activation_token
 
   before_save :downcase_email
