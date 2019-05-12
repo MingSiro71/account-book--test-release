@@ -1,5 +1,11 @@
 <% provide( :title, "Home" ) %>
 <div class="center jumbotron">
   <h1>帳簿</h1>
-  <%= link_to "Sign up", signup_path, class:"btn btn-lg btn-primary" %>
+
+  <% if @user %>
+    <%= render 'record_form', user: @user %>
+  <% else %>
+    <%= link_to "Sign up", signup_path, class:"btn btn-lg btn-primary" %>
+  <% end %>
+
 </div>
