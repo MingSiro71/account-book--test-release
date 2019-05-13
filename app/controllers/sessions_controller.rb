@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   def new
+    # Don't use it.
+    # Users can log in from home.
   end
 
   def create

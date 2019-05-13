@@ -2,8 +2,8 @@ class DivisionsController < ApplicationController
   before_action :get_division, only: [:edit, :update]
   before_action :validate_owner, only: [:edit, :update]
   def index
-    if current_user
-      @divisions = @current_user.divisions.order("name")
+    if session[:user_id]
+      @divisions = Division.where(user_id: session[:user_id]).order("name")
     else
       flash[:danger] = "ログイン時のみ有効なulrです"
       redirect_to root_url

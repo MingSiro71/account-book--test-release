@@ -2,8 +2,10 @@
 <div class="center jumbotron">
   <h1>帳簿</h1>
   <% if !logged_in? %>
-    <%= link_to "Sign up", signup_path, class:"btn btn-lg btn-primary" %>
+    <%= link_to "Sign up", signup_path, class:"btn lg-panel" %>
+    <%= render 'sign_in_form' %>
+    
   <% else %>
-    <%= "こんにちは、 #{@current_user.name}さん"%>
+    <%= "こんにちは、 #{session[:user_name]}さん"%>
   <% end %>
 </div>
