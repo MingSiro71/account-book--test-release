@@ -4,6 +4,7 @@ class DivisionsController < ApplicationController
   def index
     if session[:user_id]
       @divisions = Division.where(user_id: session[:user_id]).order("name")
+      @user_id = session[:user_id]
     else
       flash[:danger] = "ログイン時のみ有効なulrです"
       redirect_to root_url
@@ -11,14 +12,27 @@ class DivisionsController < ApplicationController
   end
 
   def new
+    # don't use it
+    # users can make division from divisions/index
+  end
+
+  def create
+    division = Division.new(division_params_independent)
+    if division.save
+      flash[:success] = "新しい事業を登録しました"
+      redirect_to divisions_path
+    else
+      flash[:danger] = "登録に失敗しました"
+      redirect_to divisions_path
+    end
   end
 
   def edit
   end
 
   def update
-    if @division.update_attributes(division_params)
-      flash[:succsess] = "変更を反映しました"
+    if @division.update_attributes(division_params_independent)
+      flash[:success] = "変更を反映しました"
       redirect_to divisions_path
     else
       render 'edit'
@@ -27,8 +41,12 @@ class DivisionsController < ApplicationController
 
  private
 
-  def division_params
+  def division_params_relational
     params.require(:division).permit(:name)
+  end
+
+  def division_params_independent
+    params.require(:division).permit(:user_id, :name)
   end
 
   def get_division

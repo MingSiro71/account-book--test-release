@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   resources :account_activations, only: [:edit]
-  resources :divisions, only: [:index, :new, :edit, :update]
+  resources :divisions, only: [:index, :new, :create, :edit, :update]
+  resources :records, only: [:index, :create, :edit, :update, :destroy]
   root 'static_pages#home'
 end

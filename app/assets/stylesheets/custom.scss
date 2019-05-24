@@ -24,6 +24,25 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+.h3{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* panels */
+div.danger-zone{
+  position: relative;
+  background: rgba(255, 255, 255, 1);
+  &:after {
+    position: absolute;
+    top: -6px; bottom: -6px;
+    left: -6px; right: -6px;
+    background: repeating-linear-gradient(45deg, yellow, yellow 12px, black 12px, black 24px);
+    background-color: black;
+    content: '';
+    z-index: -1;
+  }
+}
 
 
 /* footer */

@@ -1,8 +1,8 @@
 <li id="division-<%= division.id %>">
-  <span class="name">
+  <strong class="name">
     <%= link_to division.name, edit_division_path(division) %>
-  </span>
+  </strong>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(division.created_at) %> ago.
+    Added on <%= division.created_at %> .
   </span>
 </li>

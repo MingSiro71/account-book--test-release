@@ -1,0 +1,19 @@
+
+<li>
+  <%= record.when %>
+  <%= record.division.name %> / <%= record.account.name %>
+  <%= record.amount %>
+  <%= link_to "訂正", edit_record_path(record), class: 'btn btn-default btn-xs' %>
+</li>
+
+<ul class="bg-info">
+  <% if record.where_from && !record.where_from.empty? %>
+    <%= "#{record.where_from}から" %>
+  <% end %>
+  <% if record.where && !record.where.empty? %>
+    <%= "#{record.where}へ" %>
+  <% end %>
+  <% if record.quantity && !record.quantity.empty? %>
+    数量: <%= record.quantity %>
+  <% end %>
+</ul>

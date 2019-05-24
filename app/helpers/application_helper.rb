@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def copy_right
-    message = "Created by : HENTECH"
+    message = "Created by : HENTECH / 2019"
     message
   end
 
