@@ -1,8 +1,10 @@
 <li id="division-<%= division.id %>">
   <strong class="name">
-    <%= link_to division.name, edit_division_path(division) %>
+    <%= division.name %>
   </strong>
   <span class="timestamp">
     Added on <%= division.created_at %> .
   </span>
+  <%= link_to "編集", edit_division_path(division), class: "btn btn-small btn-default" %>
+  <%= link_to "集計を見る", division_path(division), class: "btn btn-small btn-default"  %>
 </li>

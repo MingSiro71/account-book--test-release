@@ -11,11 +11,6 @@ class DivisionsController < ApplicationController
     end
   end
 
-  def new
-    # don't use it
-    # users can make division from divisions/index
-  end
-
   def create
     division = Division.new(division_params_independent)
     if division.save
@@ -24,6 +19,31 @@ class DivisionsController < ApplicationController
     else
       flash[:danger] = "登録に失敗しました"
       redirect_to divisions_path
+    end
+  end
+
+  def show
+    @date_a = params[:date_a] if params[:date_a]
+    @date_a ||= Time.current.beginning_of_month
+    @date_z = params[:date_z] if params[:date_z] 
+    @division = Division.find_by(id: params[:id])
+    #@stats = BackRecord.stats(@division.id, date_a, date_z)
+    # hard code
+    @stats = {}
+    @stats[:debits] = {}
+    @stats[:credits] = {}
+    @stats[:results] = {}
+    @stats[:factors] = {}
+    @stats[:debits][:transportation] = {title: "交通費", value: 34490}
+    @stats[:credits][:sales] = {title: "売上", value: 320120}
+    @stats[:results][:pl] = {title: "利益収支", value: 70000}
+    @stats[:results][:cache] = {title: "キャッシュ収支", value: -20400}
+    @stats[:factors][:receivable] = {title: "未回収債権", value: -90400}
+    if @data_z
+      @back_records = BackRecord.where(division_id: params[:id]).where(when: @date_a..@date_z)
+    else
+      @back_records = BackRecord.where(division_id: params[:id]).where(when: @date_a..@date_a.end_of_month)
+# @back_records = BackRecord.where(division_id: params[:id])
     end
   end
 

@@ -1,0 +1,51 @@
+<% provide( :title, "#{@division.name}の集計" ) %>
+<main class="col-sm-10 col-sm-offset-1">
+  <h1 class="h2"><%= @division.name %>の集計</h1>
+  <p>
+  集計範囲：<%= @date_a.strftime("%m月").sub("0","") %>
+  <% if @date_z && !@month_z.empty? %>
+    〜<%= @date_z.strftime("%m月").sub("0","") %>
+  <% end %>
+  </p>
+  <div class="row">
+    <div class="col-xs-6">
+    <strong>支出</strong>
+    <%= render partial: 'stat', collection: @stats[:debits], as: :stat %>
+    </div>
+    <div class="col-xs-6">
+    <strong>収入</strong>
+    <%= render partial: 'stat', collection: @stats[:credits], as: :stat %>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <strong>
+      <%= render partial: 'stat', collection: @stats[:results], as: :stat %>
+      </strong>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+    利益 / キャッシュ　差分発生要因
+    <%= render partial: 'stat', collection: @stats[:factors], as: :stat %>
+    </div>
+  </div>
+  <div class="row panel panel-default" style="margin-top:24px">
+    <div class="panel-heading">
+      <p>バックレコード</p>
+    </div>
+    <div class="panel-body">
+    <table class="table">
+      <tr>
+      <th>借方</th>
+      <th>貸方</th>
+      <th>金額</th>
+      <th>日付</th>
+      </tr>
+    <%= render @back_records %>
+    </table>
+    </div>
+  </div>
+</main>
