@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   resources :account_activations, only: [:edit]
   resources :divisions, only: [:index, :create, :show, :edit, :update]
+  post '/division/marge', to: 'divisions#marge'
   resources :records, only: [:index, :create, :edit, :update, :destroy]
   root 'static_pages#home'
 end

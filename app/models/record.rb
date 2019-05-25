@@ -34,7 +34,7 @@ class Record < ApplicationRecord
       back_record[:when] = self.when
       back_record[:amount] = self.amount
       back_record[:debit] = account.name
-      back_record[:credit] = "事業主貸"
+      back_record[:credit] = "事業主借"
       back_record[:division_id] = self.division_id
     end
     back_record

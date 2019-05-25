@@ -23,28 +23,32 @@ class DivisionsController < ApplicationController
   end
 
   def show
-    @date_a = params[:date_a] if params[:date_a]
-    @date_a ||= Time.current.beginning_of_month
-    @date_z = params[:date_z] if params[:date_z] 
-    @division = Division.find_by(id: params[:id])
-    #@stats = BackRecord.stats(@division.id, date_a, date_z)
-    # hard code
-    @stats = {}
-    @stats[:debits] = {}
-    @stats[:credits] = {}
-    @stats[:results] = {}
-    @stats[:factors] = {}
-    @stats[:debits][:transportation] = {title: "交通費", value: 34490}
-    @stats[:credits][:sales] = {title: "売上", value: 320120}
-    @stats[:results][:pl] = {title: "利益収支", value: 70000}
-    @stats[:results][:cache] = {title: "キャッシュ収支", value: -20400}
-    @stats[:factors][:receivable] = {title: "未回収債権", value: -90400}
-    if @data_z
-      @back_records = BackRecord.where(division_id: params[:id]).where(when: @date_a..@date_z)
+    if params[:id].include?("division")
+      division_ids = Rack::Utils.parse_nested_query(params[:id]).map{|k,v|v}.flatten!
+      division_ids.delete("")
     else
-      @back_records = BackRecord.where(division_id: params[:id]).where(when: @date_a..@date_a.end_of_month)
-# @back_records = BackRecord.where(division_id: params[:id])
+      division_ids = [params[:id]]
     end
+    if division_ids.size == 0
+      flash[:danger] = "集計を行う事業が選択されていません"
+      redirect_to divisions_path 
+    end
+    @divisions=[]
+    division_ids.each do |id|
+      division = Division.find_by(id: id)
+      @divisions << division if division
+    end
+    @division = Division.new
+    @division.name = @divisions.size==1 ? @divisions[0].name : "マルチ集計：#{@divisions.map{|d| d.name}.join(", ")}"
+    @date_a = params[:date_a] ? params[:date_a] : Time.current.beginning_of_month
+    @date_z = params[:date_z] ? params[:date_z] : nil 
+    @back_records = BackRecord.period(division_ids, @date_a, @date_z)
+    @stats = @back_records.stats
+  end
+
+  def marge
+    redirect_to(controller: 'divisions', action: 'show',
+      id: params[:post][:division_ids].to_query('division'))
   end
 
   def edit
@@ -55,7 +59,8 @@ class DivisionsController < ApplicationController
       flash[:success] = "変更を反映しました"
       redirect_to divisions_path
     else
-      render 'edit'
+      flash[:danger] = "変更に失敗しました"
+      redirect_to edit_divisions_path
     end
   end
 

@@ -4,9 +4,15 @@
     <h1>Account Book</h1>
     <h2>個人事業主のための簡易帳簿システム</h2>
 
-    <div>
-      <%= link_to "Sign up", signup_path, class:"btn lg-panel col-md-6" %>
+    <div class="row group">
+      <div class="col-sm-8 col-sm-offset-2">
       <%= render 'sign_in_form' %>
+      </div>
+    </div>
+    <div class="row group">
+      <p col-sm-8 col-sm-offset-2>初めて利用される方はこちらから<br>
+      <%= link_to "アカウント作成", signup_path, class:"btn" %>
+      </p>
     </div>
   </div>
 <% else %>
