@@ -1,7 +1,9 @@
 <footer class="footer text-center">
   <span class="hidden-xs"><%= copy_right %></span>
+  <% if logged_in? %> 
   <li class="visible-xs col-xs-3"><%= link_to "Home", root_path %></li>
   <li class="visible-xs col-xs-3"><%= link_to "事業一覧", divisions_path %></li>
   <li class="visible-xs col-xs-3"><%= link_to "帳簿一覧", records_path %></li>
   <li class="visible-xs col-xs-3"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+  <% end %>
 </footer>
