@@ -6,7 +6,7 @@
   <%= link_to "訂正", edit_record_path(record), class: 'btn btn-default btn-xs' %>
 </li>
 
-<ul class="bg-info">
+<ul class="bg-info indent">
   <% if record.where_from && !record.where_from.empty? %>
     <%= "#{record.where_from}から" %>
   <% end %>
