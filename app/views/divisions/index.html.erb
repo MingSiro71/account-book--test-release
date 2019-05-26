@@ -13,7 +13,7 @@
       <div class="panel-body">
       <%= form_with scope: :post, url: division_marge_path do |f| %>
         <%= f.collection_check_boxes :division_ids, @divisions, :id, :name do |b| %>
-          <%= b.label {b.check_box + b.text} %>
+          <%= b.label {b.check_box + b.text } %>
         <% end %>
         <%= f.submit "集計を見る", class: "btn btn-default pull-right" %>
       <% end %>

@@ -25,7 +25,7 @@ Account.create!(
   name: "売上"
 )
 Account.create!(
-  name: "売掛回収"
+  name: "支払源泉徴収"
 )
 Account.create!(
   name: "売掛回収"
@@ -41,6 +41,9 @@ Account.create!(
 )
 Account.create!(
   name: "棚卸"
+)
+Account.create!(
+  name: "棚卸評価損"
 )
 Account.create!(
   name: "収入印紙代"
@@ -79,6 +82,9 @@ Account.create!(
   name: "ガソリン代"
 )
 Account.create!(
+  name: "交通費"
+)
+Account.create!(
   name: "宿泊費"
 )
 Account.create!(
@@ -115,7 +121,7 @@ Account.create!(
   name: "サンプル費"
 )
 Account.create!(
-  name: "広告費"
+  name: "広告出稿費"
 )
 Account.create!(
   name: "広報費"
@@ -145,10 +151,7 @@ Account.create!(
   name: "メンテナンス費"
 )
 Account.create!(
-  name: "備品購入費"
-)
-Account.create!(
-  name: "消耗品費"
+  name: "備品費"
 )
 Account.create!(
   name: "事務用品費"
@@ -187,6 +190,12 @@ Account.create!(
   name: "派遣受入費"
 )
 Account.create!(
+  name: "仮受源泉徴収"
+)
+Account.create!(
+  name: "仮受源泉納付"
+)
+Account.create!(
   name: "支払利息"
 )
 Account.create!(
@@ -217,32 +226,38 @@ Account.create!(
   name: "取材費"
 )
 Account.create!(
-  name: "研修費"
+  name: "従業員研修費"
 )
 Account.create!(
-  name: "研究開発費"
+  name: "研究費"
 )
 Account.create!(
   name: "マーケティング調査費"
 )
 Account.create!(
+  name: "試作費"
+)
+Account.create!(
   name: "銀行手数料"
 )
 Account.create!(
-  name: "支払手数料"
+  name: "手数料"
 )
 Account.create!(
-  name: "団体諸会費"
+  name: "組合費等"
 )
 Account.create!(
-  name: "レンタル料"
+  name: "備品レンタル料"
 )
 Account.create!(
   name: "雑費"
 )
 Account.create!(
-  name: "消費税清算"
+  name: "消費税確定"
 )
 Account.create!(
-  name: "源泉ロジック変更"
+  name: "消費税納付"
+)
+Account.create!(
+  name: "雑収入"
 )
