@@ -8,6 +8,14 @@
   <%= f.number_field :amount, class: 'form-control' %>
   </ul>
   <ul>
+  <%= f.label "消費税率" %>
+  <p>
+  <span class="hidden"><%= f.radio_button :tax, '10' %> 10%</span>
+  <%= f.radio_button :tax, '8', {:checked => true} %> 8%
+  <%= f.radio_button :tax, '0' %> 対象外
+  </p>
+  </ul>
+  <ul>
   <%= f.label "発生日" %><br>
   <%= f.date_select :when, class: 'form-control' %>
   </ul>

@@ -1,31 +1,36 @@
-<%= form_with model: record, scope: :record, url: record_path do |f| %>
-
-  <%= f.hidden_field :id, :value => record.id %>
-
-  <%= f.label :account %>
-  <%= f.text_field :account, class: 'form-control', :value => record.account.name  %>
-
-  <%= f.label :amount %>
-  <%= f.number_field :amount, class: 'form-control' %>
-
-  <%= f.label :when %>
-  <%= f.date_select :when, class: 'form-control' %>
-
-  <%= f.label :where %>
-  <%= f.text_field :where, class: 'form-control' %>
-
-  <%= f.label :where_from %>
-  <%= f.text_field :where_from, class: 'form-control' %>
-
-  <%= f.label :quantity %>
-  <%= f.number_field :quantity, class: 'form-control' %>
-
-  <%= f.label :division %>
-  <%= f.text_field :division, class: 'form-control' ,:value => record.division.name %>
-
-  <%= f.hidden_field :user_id, :value => session[:user_id] %>
-
-  <%= f.submit "訂正する", class: "btn btn-primary" %>
-<% end %>
-
-<%= link_to "削除する", record_path(record), method: :delete, data: {confirm: "削除しますか?", commit: "削除する", cancel: "削除しない" }, class: 'btn btn-primary' %>
+<ul>
+<%= f.label "会計科目タイプ" %>
+<%= f.text_field :account, class: 'form-control', :value => account_name %>
+</ul>
+<ul>
+<%= f.label "金額" %>
+<%= f.number_field :amount, class: 'form-control' %>
+</ul>
+<ul>
+<%= f.label "消費税率" %>
+<p>
+<span class="hidden"><%= f.radio_button :tax, '10' %> 10%</span>
+<%= f.radio_button :tax, '8', {:checked => true} %> 8%
+<%= f.radio_button :tax, '0' %> 対象外
+</p>
+</ul>
+<ul>
+<%= f.label "発生日" %><br>
+<%= f.date_select :when, class: 'form-control' %>
+</ul>
+<ul>
+<%= f.label "支払先" %><small> or交通費は行き先</small>
+<%= f.text_field :where, class: 'form-control' %>
+</ul>
+<ul>
+<%= f.label "売上先" %><small> or交通費は出発地</small>
+<%= f.text_field :where_from, class: 'form-control' %>
+</ul>
+<ul>
+<%= f.label "数量" %>
+<%= f.number_field :quantity, class: 'form-control' %>
+</ul>
+<ul>
+<%= f.label "発生した事業領域" %>
+<%= f.text_field :division, class: 'form-control', :value => division_name %>
+</ul>

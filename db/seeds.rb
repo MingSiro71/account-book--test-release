@@ -240,3 +240,9 @@ Account.create!(
 Account.create!(
   name: "雑費"
 )
+Account.create!(
+  name: "消費税清算"
+)
+Account.create!(
+  name: "源泉ロジック変更"
+)

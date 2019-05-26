@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_26_031346) do
+ActiveRecord::Schema.define(version: 2019_05_26_055703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_05_26_031346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "division_id"
+    t.integer "tax"
     t.index ["division_id"], name: "index_back_records_on_division_id"
     t.index ["record_id"], name: "index_back_records_on_record_id"
   end
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 2019_05_26_031346) do
     t.bigint "account_id"
     t.datetime "disabled"
     t.string "option"
+    t.integer "tax"
     t.index ["division_id"], name: "index_records_on_division_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end

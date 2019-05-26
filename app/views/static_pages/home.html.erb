@@ -21,10 +21,18 @@
   <%= "こんにちは、 #{session[:user_name]}さん"%>
   </h1>
   <div class="col-sm-4">
-    <%= render 'record_form' %>
+    <%= form_with scope: :record, url: records_path do |f| %>
+      <%= render 'records/form', f: f, account_name: "", division_name: "" %>
+      <%= f.hidden_field :user_id, :value => session[:user_id] %>
+      <ul>
+      <%= f.submit "記帳する", class: "btn btn-primary" %>
+      </ul>
+    <% end %>
   </div>
   <div class="col-sm-8">
+    <p>
+      最近記帳した30件
+    </p>
     <%= render @records %>
   </div>
 <% end %>
-
