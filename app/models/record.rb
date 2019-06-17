@@ -35,12 +35,12 @@ class Record < ApplicationRecord
       nil
   end
 
- private
-
   def new_back_records(account) # Logic for converting record to backrecord.
-    back_records = send("logic_#{account.name}")
+    back_records = send("logic_#{ApplicationRecord.en_(account.name)}")
   end
 
+  private
+  
   def logic_common_income(credit)
     back_records = []
     hash = {}
@@ -93,7 +93,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_支払源泉徴収
+  def logic_仮払源泉徴収
     if self.option == nil
       hash = {}
       hash[:amount] = self.amount
@@ -101,14 +101,14 @@ class Record < ApplicationRecord
       hash[:when] = self.when
       hash[:division_id] = self.division_id
       hash[:debit] = "売上"
-      hash[:credit] = "売上非課税部分"
+      hash[:credit] = "消費税確定済売上"
       back_records[0] = BackRecord.new(hash)
       hash = {}
       hash[:amount] = self.amount
       hash[:tax] = 0
       hash[:when] = self.when
       hash[:division_id] = self.division_id
-      hash[:debit] = "仮払税金"
+      hash[:debit] = "仮払源泉徴収"
       hash[:credit] = "事業主借"
       back_records[1] = BackRecord.new(hash)
     elsif self.option == "aftertax"
@@ -117,7 +117,7 @@ class Record < ApplicationRecord
       hash[:tax] = 0
       hash[:when] = self.when
       hash[:division_id] = self.division_id
-      hash[:debit] = "仮払税金"
+      hash[:debit] = "仮払源泉徴収"
       hash[:credit] = "事業主借"
       back_records[0] = BackRecord.new(hash)
     end
@@ -143,7 +143,7 @@ class Record < ApplicationRecord
       hash[:tax] = self.tax
       hash[:when] = self.when
       hash[:division_id] = self.division_id
-      hash[:debit] = "資産購入"
+      hash[:debit] = "固定資産"
       hash[:credit] = "事業主借"
       back_records[0] = BackRecord.new(hash)
       hash = {}
@@ -169,7 +169,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_減価償却計上
+  def logic_減価償却
     # 減価償却のoptionは"定額法,5"のように方法と年数で引き継ぐ
     # 定率法については公式があるが、行政の一覧表を持つか利用者に計算させるかどちらかしかない
     if self.option == nil
@@ -178,7 +178,7 @@ class Record < ApplicationRecord
       hash[:tax] = 0
       hash[:when] = self.when
       hash[:division_id] = self.division_id
-      hash[:debit] = "減価償却費"
+      hash[:debit] = "減価償却"
       hash[:credit] = "固定資産"
       back_records[0] = BackRecord.new(hash)
     elsif self.option.include?("定額法")
@@ -189,7 +189,7 @@ class Record < ApplicationRecord
         hash[:tax] = 0
         hash[:when] = self.when.since(i.years)
         hash[:division_id] = self.division_id
-        hash[:debit] = "減価償却費"
+        hash[:debit] = "減価償却"
         hash[:credit] = "固定資産"
         back_records[i] = BackRecord.new(hash)
       end
@@ -249,7 +249,7 @@ class Record < ApplicationRecord
     logic_common_cost("水道光熱費")
   end
 
-  def logic_電車賃
+  def logic_電車代
     logic_common_cost("旅費交通費")
   end
 
@@ -285,7 +285,7 @@ class Record < ApplicationRecord
     logic_common_cost("旅費交通費")
   end
 
-  def logic_電話料金
+  def logic_電話代
     logic_common_cost("通信費")
   end
 
@@ -369,7 +369,7 @@ class Record < ApplicationRecord
     if self.option == nil
       logic_common_cost("消耗品費")
     elsif self.option == "promotional"
-      logic_common_cost("広報費")
+      logic_common_cost("広告宣伝費")
     elsif self.option == "publish"
       logic_common_cost("印刷製本費")
     else
@@ -405,7 +405,7 @@ class Record < ApplicationRecord
     logic_common_cost("外注費")
   end
 
-  def logic_派遣受入費
+  def logic_派遣料
     logic_common_cost("外注費")
   end
 
@@ -431,7 +431,7 @@ class Record < ApplicationRecord
     hash[:tax] = 0
     hash[:when] = self.when
     hash[:division_id] = self.division_id
-    hash[:debit] = "借受源泉徴収"
+    hash[:debit] = "仮受源泉徴収"
     hash[:credit] = "事業主借"
     back_records[0] = BackRecord.new(hash)
     back_records
@@ -441,7 +441,7 @@ class Record < ApplicationRecord
     logic_common_cost("利子割引料")
   end
 
-  def logic_家賃
+  def logic_地代家賃
     logic_common_cost("地代家賃")
   end
 
@@ -457,16 +457,12 @@ class Record < ApplicationRecord
     logic_common_cost("管理費")
   end
 
-  def logic_会議費
+  def logic_conference_fee
     logic_common_cost("会議費")
   end
 
   def logic_管理費
     logic_common_cost("管理費")
-  end
-
-  def logic_会議費
-    logic_common_cost("会議費")
   end
 
   def logic_新聞図書費
@@ -513,7 +509,23 @@ class Record < ApplicationRecord
     logic_common_cost("レンタル料")
   end
 
+  def logic_租税公課
+    logic_common_cost("租税公課")
+  end
+
   def logic_消費税確定
+    hash = {}
+    hash[:amount] = self.amount
+    hash[:tax] = 0
+    hash[:when] = self.when
+    hash[:division_id] = self.division_id
+    hash[:debit] = "売上"
+    hash[:credit] = "仮受消費税"
+    back_records[0] = BackRecord.new(hash)
+    back_records
+  end
+
+  def logic_消費税納付
     hash = {}
     hash[:amount] = self.amount
     hash[:tax] = 0
@@ -525,20 +537,12 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_消費税納付
-    hash = {}
-    hash[:amount] = self.amount
-    hash[:tax] = 0
-    hash[:when] = self.when
-    hash[:division_id] = self.division_id
-    hash[:debit] = "支払消費税"
-    hash[:credit] = "仮受消費税"
-    back_records[0] = BackRecord.new(hash)
-    back_records
-  end
-
   def logic_雑収入
     logic_common_income("雑収入")
+  end
+
+  def self.en_(word)
+    super
   end
 
 end

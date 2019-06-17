@@ -6,6 +6,12 @@
   <% if @date_z && !@month_z.empty? %>
     〜<%= @date_z.strftime("%m月").sub("0","") %>
   <% end %>
+  <%= form_with scope: :post, url: :division do |f|%>
+    <%= f.hidden_field :division_ids, value: @divisions,class: 'form-control' %>
+    <%= f.date_field :date_a, class: 'form-control' %>
+    <%= f.date_field :date_z, class: 'form-control' %>
+    <%= f.submit "再集計", class: "btn btn-default pull-right" %>
+  <% end %>
   </p>
   <div class="row">
     <div class="col-xs-6">
@@ -32,6 +38,12 @@
     <%= render partial: 'stat', collection: @stats[:factors], as: :stat %>
     </div>
   </div>
+  <div class="row">
+  <div class="col-xs-12">
+  <span class="hidden">消費税区分別集計</span>
+  <%= render partial: 'stat', collection: @stats[:info], as: :stat %>
+  </div>
+</div>
   <div class="row panel panel-default" style="margin-top:24px">
     <div class="panel-heading">
       <p>バックレコード(総勘定元帳)</p>

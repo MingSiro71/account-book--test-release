@@ -34,7 +34,7 @@ Account.create!(
   name: "資産購入"
 )
 Account.create!(
-  name: "減価償却計上"
+  name: "減価償却"
 )
 Account.create!(
   name: "仕入"
@@ -67,7 +67,7 @@ Account.create!(
   name: "水道光熱費"
 )
 Account.create!(
-  name: "電車賃"
+  name: "電車代"
 )
 Account.create!(
   name: "バス代"
@@ -94,7 +94,7 @@ Account.create!(
   name: "出張先飲食費"
 )
 Account.create!(
-  name: "電話料金"
+  name: "電話代"
 )
 Account.create!(
   name: "インターネット利用料"
@@ -131,9 +131,6 @@ Account.create!(
 )
 Account.create!(
   name: "祝電代"
-)
-Account.create!(
-  name: "挨拶状代"
 )
 Account.create!(
   name: "挨拶状代"
@@ -187,7 +184,7 @@ Account.create!(
   name: "業務委託費"
 )
 Account.create!(
-  name: "派遣受入費"
+  name: "派遣料"
 )
 Account.create!(
   name: "仮受源泉徴収"
@@ -199,7 +196,7 @@ Account.create!(
   name: "支払利息"
 )
 Account.create!(
-  name: "家賃"
+  name: "地代家賃"
 )
 Account.create!(
   name: "オフィスレンタル料"

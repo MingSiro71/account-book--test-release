@@ -23,6 +23,7 @@ class DivisionsController < ApplicationController
   end
 
   def show
+    byebug
     if params[:id].include?("division")
       division_ids = Rack::Utils.parse_nested_query(params[:id]).map{|k,v|v}.flatten!
       division_ids.delete("")
@@ -43,7 +44,7 @@ class DivisionsController < ApplicationController
     @date_a = params[:date_a] ? params[:date_a] : Time.current.beginning_of_month
     @date_z = params[:date_z] ? params[:date_z] : nil 
     @back_records = BackRecord.period(division_ids, @date_a, @date_z)
-    @stats = @back_records.stats
+    @stats = BackRecord.stats(@back_records)
   end
 
   def marge

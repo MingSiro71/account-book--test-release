@@ -1,28 +1,13 @@
-class ApplicationRecord < ActiveRecord::Base
-  self.abstract_class = true
-
-  def self.transrate(word, from, to)
-    reference = dictionary
-    reference.find{|item| item[:"#{from}"] == word}[:"#{to}"] || raise
-  end
-
-  def self.en_(word)
-    transrate(word, "ja", "en")
-  end
-
-  def self.ja_(word)
-    transrate(word, "en", "ja")
-  end
-
-  def self.tax_rates
+module Settings
+  def tax_rates
     [0, 8, 10]
   end
 
-  def self.dictionary
+  def dictionary
     array = [
       # Used in record (& both).
       {:ja=>"売上", :en=>"sales"},
-      {:ja=>"仮払源泉徴収", :en=>"advance_withholding"},
+      {:ja=>"支払源泉徴収", :en=>"advance_withholding"},
       {:ja=>"売掛回収", :en=>"collection_of_bills"},
       {:ja=>"資産購入", :en=>"acquirement_of_assets"},
       {:ja=>"減価償却", :en=>"depreciation"},
@@ -95,22 +80,22 @@ class ApplicationRecord < ActiveRecord::Base
       {:ja=>"銀行手数料", :en=>"bank_charge"},
       {:ja=>"手数料", :en=>"commissions"},
       {:ja=>"組合費等", :en=>"union_due"},
-      {:ja=>"備品レンタル料", :en=>"lental_supply_fee"},
+      {:ja=>"備品レンタル料", :en=>"rental_fee"},
       {:ja=>"雑費", :en=>"sundries"},
       {:ja=>"消費税確定", :en=>"vat_fix"},
       {:ja=>"消費税納付", :en=>"vat_payment"},
-      {:ja=>"租税公課", :en=>"taxes"},
       {:ja=>"雑収入", :en=>"miscellaneous_income"},
-      # Used in backrecord and stats
+      # Used in backrecord.
       {:ja=>"事業主貸", :en=>"owner_withdrawal"},
       {:ja=>"事業主借", :en=>"owner_investment"},
       {:ja=>"売掛金", :en=>"account_recievable"},
       {:ja=>"消費税確定済売上", :en=>"vat_fixed_sales"},
+      {:ja=>"仮払税金", :en=>"advanced_tax"},
       {:ja=>"固定資産", :en=>"assets"},
       {:ja=>"消費税相当額", :en=>"predefined_vat"},
       {:ja=>"繰越在庫", :en=>"carry_over_stock"},
-      {:ja=>"期首棚卸高", :en=>"initial_inventory"},
-      {:ja=>"期末棚卸高", :en=>"final_inventory"},
+      {:ja=>"期末棚卸高", :en=>"initial_inventory"},
+      {:ja=>"期首棚卸高", :en=>"final_inventory"},
       {:ja=>"荷造運賃", :en=>"packing_freight"},
       {:ja=>"支払手数料", :en=>"commissions_payment"},
       {:ja=>"広告宣伝費", :en=>"advertising_expense"},
@@ -120,16 +105,8 @@ class ApplicationRecord < ActiveRecord::Base
       {:ja=>"教育研修費", :en=>"education_and_training"},
       {:ja=>"研究開発費", :en=>"r_and_d_expense"},
       {:ja=>"諸会費", :en=>"dues"},
-      {:ja=>"レンタル料", :en=>"rental_fee"},
-      {:ja=>"仮受消費税", :en=>"incoming_vat"},
-      {:ja=>"支払消費税", :en=>"paid_vat"},
-      # Used in stats
-      {:ja=>"利益収支", :en=>"profit"},
-      {:ja=>"キャッシュ収支", :en=>"cache"},
-      {:ja=>"債権未回収分", :en=>"uncollected"},
-      {:ja=>"資産購入時消費税", :en=>"vat_for_assets"},
-      {:ja=>"在庫変動", :en=>"inventory_change"}
+      {:ja=>"仮受消費税", :en=>"income_vat"},
+      {:ja=>"支払消費税", :en=>"paid_vat"}
     ]
   end
-
 end
