@@ -1,0 +1,3 @@
+<% unless stat[1][:value] == 0 %>
+<li> <%= "#{stat[1][:title]}: #{stat[1][:value].to_s(:delimited)}" %> </li>
+<% end %>
