@@ -6,12 +6,6 @@
   <% if @date_z && !@month_z.empty? %>
     〜<%= @date_z.strftime("%m月").sub("0","") %>
   <% end %>
-  <%= form_with scope: :post, url: :division do |f|%>
-    <%= f.hidden_field :division_ids, value: @divisions,class: 'form-control' %>
-    <%= f.date_field :date_a, class: 'form-control' %>
-    <%= f.date_field :date_z, class: 'form-control' %>
-    <%= f.submit "再集計", class: "btn btn-default pull-right" %>
-  <% end %>
   </p>
   <div class="row">
     <div class="col-xs-6">
