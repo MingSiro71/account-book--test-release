@@ -23,7 +23,6 @@ class DivisionsController < ApplicationController
   end
 
   def show
-    byebug
     if params[:id].include?("division")
       division_ids = Rack::Utils.parse_nested_query(params[:id]).map{|k,v|v}.flatten!
       division_ids.delete("")
