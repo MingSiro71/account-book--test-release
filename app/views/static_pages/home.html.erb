@@ -1,15 +1,4 @@
 <% provide( :title, "Home" ) %>
-<<<<<<< HEAD
-<div class="center jumbotron">
-  <h1>帳簿</h1>
-  <% if @user %>
-    <%= render 'record_form', user: @user %>
-  <% else %>
-    <%= link_to "Sign up", signup_path, class:"btn btn-lg btn-primary" %>
-  <% end %>
-
-</div>
-=======
 <% if !logged_in? %>
   <div class="center jumbotron">
     <h1>Account Book</h1>
@@ -32,11 +21,18 @@
   <%= "こんにちは、 #{session[:user_name]}さん"%>
   </h1>
   <div class="col-sm-4">
-    <%= render 'record_form' %>
+    <%= form_with scope: :record, url: records_path do |f| %>
+      <%= render 'records/form', f: f, account_name: "", division_name: "" %>
+      <%= f.hidden_field :user_id, :value => session[:user_id] %>
+      <ul>
+      <%= f.submit "記帳する", class: "btn btn-primary" %>
+      </ul>
+    <% end %>
   </div>
   <div class="col-sm-8">
+    <p>
+      最近記帳した30件
+    </p>
     <%= render @records %>
   </div>
 <% end %>
-
->>>>>>> tuned-session

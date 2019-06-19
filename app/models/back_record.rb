@@ -2,6 +2,12 @@ class BackRecord < ApplicationRecord
   belongs_to :division, optional: true
   belongs_to :record, optional: true
   validates :division_id, presence: true
+  validates :record_id, presence: true
+  validates :amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :when, presence: true
+  validates :tax, presence: true, inclusion: { in: tax_rates }
+  validates :debit, presence: true
+  validates :credit, presence: true
 
   def self.period(division_ids, date_a, date_z)
     if date_z

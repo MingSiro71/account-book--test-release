@@ -19,9 +19,9 @@ class SessionsController < ApplicationController
         redirect_to root_url
       end
     else
-      flash.now[:danger] = 'パスワードとメールアドレスが一致しません'
-      flash.now[:danger_additional] = 'または… アカウントは作成済みですか？'
-      render 'new'
+      flash[:danger] = 'パスワードとメールアドレスが一致しません'
+      flash[:additional] = 'または… アカウントは作成済みですか？'
+      redirect_to root_url
     end
   end
 

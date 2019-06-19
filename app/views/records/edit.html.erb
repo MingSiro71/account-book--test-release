@@ -1,3 +1,11 @@
 <% provide( :title, "帳簿の訂正" ) %>
 <h1>帳簿の訂正</h1>
-<%= render 'form', record: @record %>
+<%= form_with model: @record, scope: :record, url: record_path do |f| %>
+  <%= f.hidden_field :id, :value => @record.id %>
+  <%= render 'form', f: f, account_name: @record.account.name, division_name: @record.division.name %>
+  <%= f.hidden_field :user_id, :value => session[:user_id] %>
+  <ul>
+  <%= f.submit "訂正する", class: "btn btn-primary" %>
+  <%= link_to "削除する", record_path(@record), method: :delete, data: {confirm: "削除しますか?", commit: "削除する", cancel: "削除しない" }, class: 'btn btn-danger' %>
+  </ul>
+<% end %>
