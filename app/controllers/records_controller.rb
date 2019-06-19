@@ -41,7 +41,6 @@ class RecordsController < ApplicationController
   end
 
   def destroy
-    byebug
     @original_record = Record.find_by(id: params[:id])
     @original_record.disabled = Time.zone.now
     if @original_record.save
