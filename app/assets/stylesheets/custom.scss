@@ -18,6 +18,13 @@ section {
 textarea {
   resize: vertical;
 }
+ul{
+  padding-left: 0px;
+}
+ul.indent{
+  margin-left: 12px;
+  padding-left: 6px;
+}
 .center {
   text-align: center;
 }
@@ -29,7 +36,13 @@ textarea {
   margin-bottom: 10px;
 }
 .group{
-  margin-top: 24px
+  margin-top: 24px;
+}
+.x-spacing{
+  margin-right: 20px;
+}
+.y-spacing{
+  margin-bottom: 16px;
 }
 
 /* panels */
@@ -47,15 +60,33 @@ div.danger-zone{
   }
 }
 
+/* button */
+.btn-gray{
+  background-color: #ccc;
+  color: #333;
+  font-weight: bold;
+}
+
+.menu-toggle{
+  margin-right: 32px;
+}
+
 
 /* footer */
 footer{
   display: block;
   width: 100%;
-  position: absolute;
+  height: 20px;
+  position: fixed;
   bottom: 0;
   background-color: var(--main-bg-collor);
   color: var(--inverse-font-collor);
+  a{
+    color: white;
+    &:hover{
+      color: white;
+    }
+  }
 }
 
 .debug_dump {
