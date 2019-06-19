@@ -1,3 +1,8 @@
 <% provide( :title, "事業一覧" ) %>
-<h1>あなたの事業一覧</h1>
+<h1 class="h2">あなたの事業一覧</h1>
+<div class="col-sm-4">
+<%= render 'division_form' %>
+</div>
+<div class="col-sm-8">
 <%= render @divisions %>
+</div>

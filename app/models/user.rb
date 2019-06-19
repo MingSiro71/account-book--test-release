@@ -34,8 +34,9 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-  def forget
-    update_attribute(:remember_digest, nil)
+  def forget(id)
+    user = User.find_by(id: id)
+    user.update_attribute(:remember_digest, nil)
   end
 
   def activate

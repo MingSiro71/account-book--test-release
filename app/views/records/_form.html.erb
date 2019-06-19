@@ -1,0 +1,31 @@
+<%= form_with model: record, scope: :record, url: record_path do |f| %>
+
+  <%= f.hidden_field :id, :value => record.id %>
+
+  <%= f.label :account %>
+  <%= f.text_field :account, class: 'form-control', :value => record.account.name  %>
+
+  <%= f.label :amount %>
+  <%= f.number_field :amount, class: 'form-control' %>
+
+  <%= f.label :when %>
+  <%= f.date_select :when, class: 'form-control' %>
+
+  <%= f.label :where %>
+  <%= f.text_field :where, class: 'form-control' %>
+
+  <%= f.label :where_from %>
+  <%= f.text_field :where_from, class: 'form-control' %>
+
+  <%= f.label :quantity %>
+  <%= f.number_field :quantity, class: 'form-control' %>
+
+  <%= f.label :division %>
+  <%= f.text_field :division, class: 'form-control' ,:value => record.division.name %>
+
+  <%= f.hidden_field :user_id, :value => session[:user_id] %>
+
+  <%= f.submit "訂正する", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "削除する", record_path(record), method: :delete, data: {confirm: "削除しますか?", commit: "削除する", cancel: "削除しない" }, class: 'btn btn-primary' %>

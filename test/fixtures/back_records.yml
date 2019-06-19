@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  record: 
+  debit: MyString
+  credit: MyString
+  amount: 1
+  when: 2019-05-19
+
+two:
+  record: 
+  debit: MyString
+  credit: MyString
+  amount: 1
+  when: 2019-05-19

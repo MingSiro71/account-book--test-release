@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_110756) do
+ActiveRecord::Schema.define(version: 2019_05_24_044334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,19 @@ ActiveRecord::Schema.define(version: 2019_05_12_110756) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "back_records", force: :cascade do |t|
+    t.bigint "record_id"
+    t.string "debit"
+    t.string "credit"
+    t.integer "amount"
+    t.date "when"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "division_id"
+    t.index ["division_id"], name: "index_back_records_on_division_id"
+    t.index ["record_id"], name: "index_back_records_on_record_id"
   end
 
   create_table "divisions", force: :cascade do |t|
@@ -38,6 +51,8 @@ ActiveRecord::Schema.define(version: 2019_05_12_110756) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "account_id"
+    t.datetime "disabled"
     t.index ["division_id"], name: "index_records_on_division_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end
@@ -57,6 +72,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_110756) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "back_records", "divisions"
   add_foreign_key "divisions", "users"
   add_foreign_key "records", "divisions"
   add_foreign_key "records", "users"
