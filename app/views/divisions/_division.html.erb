@@ -1,0 +1,9 @@
+<li id="division-<%= division.id %>">
+  <span class="user"><%= division.user.name %></span>
+  <span class="name">
+    <%= link_to division.name, edit_division_path(division) %>
+  </span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(division.created_at) %> ago.
+  </span>
+</li>

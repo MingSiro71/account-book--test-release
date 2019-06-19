@@ -1,7 +1,6 @@
 <% provide( :title, "Home" ) %>
 <div class="center jumbotron">
   <h1>帳簿</h1>
-
   <% if @user %>
     <%= render 'record_form', user: @user %>
   <% else %>

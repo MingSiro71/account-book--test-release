@@ -14,6 +14,10 @@ class ActiveSupport::TestCase
     session[:user_id] = user.id
   end
 
+  def log_out
+    session[:user_id] = nil
+  end
+
 end
 
 class ActionDispatch::IntegrationTest

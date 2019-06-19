@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_120152) do
-
+ActiveRecord::Schema.define(version: 2019_05_12_110756) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "divisions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_divisions_on_user_id"
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "division_id"
+    t.integer "amount"
+    t.date "when"
+    t.string "where"
+    t.string "where_from"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["division_id"], name: "index_records_on_division_id"
+    t.index ["user_id"], name: "index_records_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -30,4 +57,7 @@ ActiveRecord::Schema.define(version: 2019_05_09_120152) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "divisions", "users"
+  add_foreign_key "records", "divisions"
+  add_foreign_key "records", "users"
 end
