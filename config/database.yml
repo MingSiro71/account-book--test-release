@@ -80,6 +80,8 @@ test:
 #
 production:
   <<: *default
+  template: template0
+  encoding: utf-8
   database: account-book_production
   username: account-book
   password: <%= ENV['ACCOUNT-BOOK_DATABASE_PASSWORD'] %>
