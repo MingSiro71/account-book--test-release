@@ -93,7 +93,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_仮払源泉徴収
+  def logic_advance_withholding
     if self.option == nil
       hash = {}
       hash[:amount] = self.amount
@@ -124,7 +124,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_売掛回収
+  def logic_collection_of_bills
     hash = {}
     hash[:amount] = self.amount
     hash[:tax] = 0
@@ -136,7 +136,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_資産購入
+  def logic_acquirement_of_assets
     if self.option == nil
       hash = {}
       hash[:amount] = substance = (self.amount.to_f*(100.0/108.0)).to_i
@@ -169,7 +169,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_減価償却
+  def logic_depreciation
     # 減価償却のoptionは"定額法,5"のように方法と年数で引き継ぐ
     # 定率法については公式があるが、行政の一覧表を持つか利用者に計算させるかどちらかしかない
     if self.option == nil
@@ -197,11 +197,11 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_仕入
+  def logic_purchase
     logic_common_cost("仕入")
   end
 
-  def logic_棚卸
+  def logic_inventory
     hash = {}
     hash[:amount] = self.amount
     hash[:tax] = 0
