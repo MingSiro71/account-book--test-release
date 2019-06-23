@@ -67,7 +67,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_売上
+  def logic_sales
     back_records = []
     if self.option == nil # 即日支払の場合
       hash = {}
@@ -221,151 +221,151 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_収入印紙代
+  def logic_revenue_stamp_fee
     logic_common_cost("消耗品費")
   end
 
-  def logic_梱包資材
+  def logic_package_material
     logic_common_cost("荷造運賃")
   end
 
-  def logic_送料
+  def logic_shipping_fee
     logic_common_cost("荷造運賃")
   end
 
-  def logic_水道代
+  def logic_water_charge
     logic_common_cost("水道光熱費")
   end
 
-  def logic_電気代
+  def logic_electricity_charge
     logic_common_cost("水道光熱費")
   end
 
-  def logic_ガス代
+  def logic_gas_charge
     logic_common_cost("水道光熱費")
   end
 
-  def logic_水道光熱費
+  def logic_utilities_charge
     logic_common_cost("水道光熱費")
   end
 
-  def logic_電車代
+  def logic_train_fee
     logic_common_cost("旅費交通費")
   end
 
-  def logic_バス代
+  def logic_bus_fee
     logic_common_cost("旅費交通費")
   end
 
-  def logic_タクシー代
+  def logic_taxi_fare
     logic_common_cost("旅費交通費")
   end
 
-  def logic_高速道路等利用料
+  def logic_highway_toll
     logic_common_cost("旅費交通費")
   end
 
-  def logic_ガソリン代
+  def logic_gasoline
     logic_common_cost("旅費交通費")
   end
 
-  def logic_交通費
+  def logic_transport_cost
     logic_common_cost("旅費交通費")
   end
 
-  def logic_宿泊費
+  def logic_hotel_charge
     logic_common_cost("旅費交通費")
   end
 
-  def logic_旅費交通費
+  def logic_travel_cost
     logic_common_cost("旅費交通費")
   end
 
-  def logic_出張先飲食費
+  def logic_travel_food_expense
     logic_common_cost("旅費交通費")
   end
 
-  def logic_電話代
+  def logic_call_expense
     logic_common_cost("通信費")
   end
 
-  def logic_インターネット利用料
+  def logic_internet_fee
     logic_common_cost("通信費")
   end
 
-  def logic_サーバ等利用料
+  def logic_server_fee
     logic_common_cost("通信費")
   end
 
-  def logic_通信費
+  def logic_communication_cost
     logic_common_cost("通信費")
   end
 
-  def logic_私書箱利用料
+  def logic_pobox_fee
     logic_common_cost("通信費")
   end
 
-  def logic_ソフトウェア利用料
+  def logic_software_fee
     logic_common_cost("支払手数料")
   end
 
-  def logic_クラウドサービス利用料
+  def logic_xaas_fee
     logic_common_cost("支払手数料")
   end
 
-  def logic_システム利用料
+  def logic_system_fee
     logic_common_cost("支払手数料")
   end
 
-  def logic_広報費
+  def logic_pr_fee
     logic_common_cost("広告宣伝費")
   end
 
-  def logic_サンプル費
+  def logic_sample_cost
     logic_common_cost("広告宣伝費")
   end
 
-  def logic_広告出稿費
+  def logic_ad_publicity_fee
     logic_common_cost("広告宣伝費")
   end
 
-  def logic_接待交際費
+  def logic_entertainment_expenses
     logic_common_cost("接待交際費")
   end
 
-  def logic_祝電費
+  def logic_telegram_fee
     logic_common_cost("接待交際費")
   end
 
-  def logic_挨拶状代
+  def logic_greeting_card_cost
     logic_common_cost("接待交際費")
   end
 
-  def logic_贈答品費
+  def logic_gift_cost
     logic_common_cost("接待交際費")
   end
 
-  def logic_損害保険料
+  def logic_insurance_premium
     logic_common_cost("損害保険料")
   end
 
-  def logic_設備修理費
+  def logic_equipment_repare_cost
     logic_common_cost("管理費")
   end
 
-  def logic_メンテナンス費
+  def logic_maintenance_cost
     logic_common_cost("管理費")
   end
 
-  def logic_備品費
+  def logic_equipment_cost
     logic_common_cost("消耗品費")
   end
 
-  def logic_事務用品費
+  def logic_office_supplies_cost
     logic_common_cost("消耗品費")
   end
 
-  def logic_印刷費
+  def logic_printing_cost
     if self.option == nil
       logic_common_cost("消耗品費")
     elsif self.option == "promotional"
@@ -377,43 +377,43 @@ class Record < ApplicationRecord
     end
   end
 
-  def logic_消耗品費
+  def logic_supplies_cost
     logic_common_cost("消耗品費")
   end
 
-  def logic_福利厚生費
+  def logic_welfare_expence
     logic_common_cost("福利厚生費")
   end
 
-  def logic_給与
+  def logic_payroll
     logic_common_cost("給与賃金")
   end
 
-  def logic_賞与
+  def logic_bonus_payment
     logic_common_cost("賞与")
   end
 
-  def logic_アルバイト代
+  def logic_wages_payment
     logic_common_cost("雑給")
   end
 
-  def logic_謝礼
+  def logic_honorarium
     logic_common_cost("雑費")
   end
 
-  def logic_業務委託費
+  def logic_commission_expense
     logic_common_cost("外注費")
   end
 
-  def logic_派遣料
+  def logic_dispaching_fee
     logic_common_cost("外注費")
   end
 
-  def logic_外注費
+  def logic_outsourcing_cost
     logic_common_cost("外注費")
   end
 
-  def logic_仮受源泉徴収
+  def logic_incoming_withholding
     hash = {}
     hash[:amount] = self.amount
     hash[:tax] = 0
@@ -425,7 +425,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_仮受源泉納付
+  def logic_withholding_payment
     hash = {}
     hash[:amount] = self.amount
     hash[:tax] = 0
@@ -437,23 +437,23 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_支払利息
+  def logic_interest_expense
     logic_common_cost("利子割引料")
   end
 
-  def logic_地代家賃
+  def logic_rent
     logic_common_cost("地代家賃")
   end
 
-  def logic_レンタルオフィス利用料
+  def logic_rental_office_fee
     logic_common_cost("地代家賃")
   end
 
-  def logic_貸倒金
+  def logic_uncollectable_account
     logic_common_cost("貸倒金")
   end
 
-  def logic_清掃料
+  def logic_cleaning_expense
     logic_common_cost("管理費")
   end
 
@@ -461,59 +461,59 @@ class Record < ApplicationRecord
     logic_common_cost("会議費")
   end
 
-  def logic_管理費
+  def logic_administrative_expense
     logic_common_cost("管理費")
   end
 
-  def logic_新聞図書費
+  def logic_newspaper_books_expense
     logic_common_cost("新聞図書費")
   end
 
-  def logic_展示会等入場料
+  def logic_exhibision_admission_fee
     logic_common_cost("取材費")
   end
 
-  def logic_取材費
+  def logic_coverage_fee
     logic_common_cost("取材費")
   end
 
-  def logic_従業員研修費
+  def logic_training_expense
     logic_common_cost("教育研修費")
   end
 
-  def logic_マーケティング調査費
+  def logic_marketing_survey_cost
     logic_common_cost("研究開発費")
   end
 
-  def logic_研究費
+  def logic_reserch_expense
     logic_common_cost("研究開発費")
   end
 
-  def logic_試作費
+  def logic_testing_expense
     logic_common_cost("研究開発費")
   end
 
-  def logic_銀行手数料
+  def logic_bank_charge
     logic_common_cost("支払手数料")
   end
 
-  def logic_手数料
+  def logic_commissions
     logic_common_cost("支払手数料")
   end
 
-  def logic_組合費等
+  def logic_union_due
     logic_common_cost("諸会費")
   end
 
-  def logic_備品レンタル料
+  def logic_lental_supply_fee
     logic_common_cost("レンタル料")
   end
 
-  def logic_租税公課
+  def logic_taxes
     logic_common_cost("租税公課")
   end
 
-  def logic_消費税確定
+  def logic_vat_fix
     hash = {}
     hash[:amount] = self.amount
     hash[:tax] = 0
@@ -525,7 +525,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_消費税納付
+  def logic_vat_payment
     hash = {}
     hash[:amount] = self.amount
     hash[:tax] = 0
@@ -537,7 +537,7 @@ class Record < ApplicationRecord
     back_records
   end
 
-  def logic_雑収入
+  def logic_miscellaneous_income
     logic_common_income("雑収入")
   end
 
