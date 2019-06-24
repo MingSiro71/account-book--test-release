@@ -16,23 +16,24 @@
     </div>
   </div>
 <% else %>
-<main class="col-sm-10 col-sm-offset-1">
-  <h1 class="h4 y-spacing">
-  <%= "こんにちは、 #{session[:user_name]}さん"%>
-  </h1>
-  <div class="col-sm-4">
-    <%= form_with scope: :record, url: records_path do |f| %>
-      <%= render 'records/form', f: f, account_name: "", division_name: "" %>
-      <%= f.hidden_field :user_id, :value => session[:user_id] %>
-      <ul>
-      <%= f.submit "記帳する", class: "btn btn-primary" %>
-      </ul>
-    <% end %>
-  </div>
-  <div class="col-sm-8">
-    <p>
-      最近記帳した30件
-    </p>
-    <%= render @records %>
-  </div>
+  <main class="col-sm-10 col-sm-offset-1">
+    <h1 class="h4 y-spacing">
+    <%= "こんにちは、 #{session[:user_name]}さん"%>
+    </h1>
+    <div class="col-sm-4">
+      <%= form_with scope: :record, url: records_path do |f| %>
+        <%= render 'records/form', f: f, account_name: "", division_name: "" %>
+        <%= f.hidden_field :user_id, :value => session[:user_id] %>
+        <ul>
+        <%= f.submit "記帳する", class: "btn btn-primary" %>
+        </ul>
+      <% end %>
+    </div>
+    <div class="col-sm-8">
+      <p>
+        最近記帳した30件
+      </p>
+      <%= render @records %>
+    </div>
+  </main>
 <% end %>

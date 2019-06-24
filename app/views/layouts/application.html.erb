@@ -18,6 +18,15 @@
       <% end %>
       <%= yield %>
     </div>
+    <% if ENV['ACCOUNT_BOOK_VERSION']=="alpha" %>
+    <div class="container">
+      <p>
+        このアプリケーションは現在α版で公開しています。バグの報告、機能の改善提案を下記のメールにお願いします。
+        ming.hentech@gmail.com<br>
+        また、β版に向けて入力補助機能を実装中ですが、β版までは<a href="https://www.facebook.com/permalink.php?story_fbid=620457075131776&id=620447568466060&__tn__=-R" target="_blank">仕訳一覧表</a>をご利用ください。
+      </p>
+    </div>
+    <% end %>
     <%= render 'layouts/footer' %>
     <%= debug(params) if Rails.env.development? %>
   </body>
