@@ -30,10 +30,21 @@
       <% end %>
     </div>
     <div class="col-sm-8">
+    <% if @records.present? %>
       <p>
         最近記帳した30件
       </p>
       <%= render @records %>
+    <% elsif has_division? %>
+      <p>
+        まだ記帳された記録がありません。フォームから記帳を始めましょう！
+      </p>
+    <% else %>
+      <p>
+        記帳を始める前に、まずは事業タブからあなたの事業を登録しましょう！<br>
+        事業をアプリケーションに登録することで記帳が可能になります。
+      </p>
+    <% end %>
     </div>
   </main>
 <% end %>
