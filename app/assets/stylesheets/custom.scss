@@ -49,6 +49,8 @@ ul.indent{
 div.danger-zone{
   position: relative;
   background: rgba(255, 255, 255, 1);
+  margin-top: 3em;
+  padding : 1em;
   &:after {
     position: absolute;
     top: -6px; bottom: -6px;

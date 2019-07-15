@@ -3,7 +3,7 @@ class DivisionsController < ApplicationController
   before_action :validate_owner, only: [:edit, :update]
   def index
     if session[:user_id]
-      @divisions = Division.where(user_id: session[:user_id]).order("name")
+      @divisions = Division.where(user_id: session[:user_id]).where(disabled: nil).order("name")
       @user_id = session[:user_id]
     else
       flash[:danger] = "ログイン時のみ有効なulrです"
@@ -61,6 +61,17 @@ class DivisionsController < ApplicationController
     else
       flash[:danger] = "変更に失敗しました"
       redirect_to edit_divisions_path
+    end
+  end
+
+  def destroy
+    division = Division.find_by(id: params[:id])
+    if division.update_attributes(disabled: Time.zone.now)
+      flash[:success] = "事業を削除しました"
+      redirect_to divisions_path      
+    else 
+      flash[:danger] = "事業の削除中にエラーが発生しました"
+      redirect_to divisions_path
     end
   end
 

@@ -3,30 +3,18 @@
 <h1><%= @division.name %>の編集</h1>
 <div class="col-sm-12">
   <%= form_with model: @division, method: :patch do |f| %>
-
     <%= f.label "事業領域名" %>
     <%= f.text_field :name %>
-
     <%= f.submit "名称変更", class: "btn btn-primary pull-right" %>
   <% end %>
   <br>
 </div>
 <div class="col-sm-12 danger-zone ">
   <strong>Danger Zone!</strong>
+  <br>
+  <%= link_to "削除する", division_path(@division), method: :delete, data: {confirm: "削除しますか?", commit: "削除する", cancel: "削除しない" }, class: 'btn btn-danger pull-right' %>
   <p>
-  事業領域の削除を行なった場合、その事業領域に関連する全ての会計レコードが削除されます。
-  レコードの削除と異なり、バックアップは一切行われません。まず、レコード自体が必要な場合はレコードの編集画面から事業領域の変更を行ってください。
+    削除してしまうと、事業に紐づいているレコードは参照できなくなります。
   </p>
-  <p>
-  レコード自体が不要でも、以下の方法で対応してはいかがでしょうか？
-  <li>事業領域名を使っていないことが一目でわかる名前に変更する
-  <li>集計の際に選択チェックを外すようにする
-  </p>
-  <p>
-  それでも削除して良いという方はこちらから削除
-  </p>
-  <%= form_with model: @division, method: :delete do |f| %>
-    <%= f.submit "削除する", class: "btn btn-danger pull-right" %>
-  <% end %>
 </div>
 </main>

@@ -35,7 +35,7 @@
         最近記帳した30件
       </p>
       <%= render @records %>
-    <% elsif has_division? %>
+    <% elsif @divisions.present? %>
       <p>
         まだ記帳された記録がありません。フォームから記帳を始めましょう！
       </p>

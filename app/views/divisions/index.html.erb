@@ -5,6 +5,7 @@
     <%= render 'division_form' %>
   </div>
   <div class="col-sm-8">
+    <% if @divisions.present? %>
     <%= render @divisions %>
     <div class="panel panel-default group">
       <div class="panel-heading">
@@ -19,5 +20,10 @@
       <% end %>
       </div>
     </div>
+    <% else %>
+      <p>
+        事業が登録されていない状態です、事業名を決めて追加ボタンから事業を作りましょう！
+      </p>
+    <% end %>
   </div>
 </main>
