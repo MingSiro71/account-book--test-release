@@ -20,12 +20,12 @@
     <h1 class="h4 y-spacing">
     <%= "こんにちは、 #{session[:user_name]}さん"%>
     </h1>
-    <div class="col-sm-4">
+    <div class="col-sm-4", id="record_form">
       <%= form_with scope: :record, url: records_path do |f| %>
         <%= render 'records/form', f: f, account_name: "", division_name: "" %>
         <%= f.hidden_field :user_id, :value => session[:user_id] %>
         <ul>
-        <%= f.submit "記帳する", class: "btn btn-primary" %>
+        <%= f.submit "記帳する", class: "btn btn-primary", id: "record_submit" %>
         </ul>
       <% end %>
     </div>

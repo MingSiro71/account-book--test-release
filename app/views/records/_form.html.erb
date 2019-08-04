@@ -1,13 +1,15 @@
-<ul>
-<%= f.label "会計科目タイプ" %>
+<ul id="account">
+<%= f.label "account", "会計の種類" %>
 <%= f.text_field :account, class: 'form-control', :value => account_name %>
+<p class="inactive" id="recomend">
+</p>
 </ul>
 <ul>
-<%= f.label "金額" %>
+<%= f.label "amount", "金額" %>
 <%= f.number_field :amount, class: 'form-control' %>
 </ul>
-<ul>
-<%= f.label "消費税率" %>
+<ul class="inactive" id="tax">
+<%= f.label "tax", "消費税率" %>
 <p>
 <span class="hidden"><%= f.radio_button :tax, '10' %> 10%</span>
 <%= f.radio_button :tax, '8', {:checked => true} %> 8%
@@ -15,23 +17,29 @@
 <%= f.radio_button :tax, '00' %> 不課税
 </p>
 </ul>
-<ul>
-<%= f.label "発生日" %><br>
+<ul class="inactive" id="option">
+<label>オプション
+<p>
+</p>
+</label>
+</ul>
+<ul id="when">
+<%= f.label "when", "発生日" %><br>
 <%= f.date_select :when, class: 'form-control', :use_month_numbers => true, :date_separator => "/" %>
 </ul>
-<ul>
-<%= f.label "支払先" %><small> or交通費は行き先</small>
+<ul class="inactive" id="where">
+<%= f.label "where", "支払先" %><small> or交通費は行き先</small>
 <%= f.text_field :where, class: 'form-control' %>
 </ul>
-<ul>
-<%= f.label "売上先" %><small> or交通費は出発地</small>
+<ul class="inactive" id="where_from">
+<%= f.label "where_from", "売上先" %><small> or交通費は出発地</small>
 <%= f.text_field :where_from, class: 'form-control' %>
 </ul>
-<ul>
-<%= f.label "数量" %>
+<ul class="inactive" id="quantity">
+<%= f.label "quantity", "数量" %>
 <%= f.number_field :quantity, class: 'form-control' %>
 </ul>
-<ul>
-<%= f.label "発生した事業領域" %>
+<ul id="division">
+<%= f.label "division", "発生した事業領域" %>
 <%= f.select :division, @divisions.map{|t| [t.name, t.name]}, {}, {class: 'form-control'} %>
 </ul>

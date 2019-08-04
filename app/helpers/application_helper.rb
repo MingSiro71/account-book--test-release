@@ -15,7 +15,7 @@ module ApplicationHelper
 
   def log_in_by_id(id)
     session[:user_id] = id
-    session[:user_name] = User.find_by(id: id)
+    session[:user_name] = User.find_by(id: id).name
   end
 
   def logged_in_as_owner?(model)

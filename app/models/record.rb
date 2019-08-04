@@ -69,7 +69,7 @@ class Record < ApplicationRecord
 
   def logic_sales
     back_records = []
-    if self.option == nil # 即日支払の場合
+    if self.option == "ontime" # 即日支払の場合
       hash = {}
       hash[:amount] = self.amount
       hash[:tax] = self.tax
@@ -78,7 +78,7 @@ class Record < ApplicationRecord
       hash[:debit] = "事業主貸"
       hash[:credit] = "売上"
       back_records[0] = BackRecord.new(hash)
-    elsif self.option == "credit_selling" # 掛売の場合
+    elsif self.option == "as_recievable" # 掛売の場合
       hash = {}
       hash[:amount] = self.amount
       hash[:tax] = self.tax
@@ -269,6 +269,10 @@ class Record < ApplicationRecord
     logic_common_cost("旅費交通費")
   end
 
+  def logic_public_transport_cost
+    logic_common_cost("旅費交通費")
+  end
+
   def logic_transport_cost
     logic_common_cost("旅費交通費")
   end
@@ -329,10 +333,6 @@ class Record < ApplicationRecord
     logic_common_cost("広告宣伝費")
   end
 
-  def logic_entertainment_expenses
-    logic_common_cost("接待交際費")
-  end
-
   def logic_telegram_fee
     logic_common_cost("接待交際費")
   end
@@ -345,7 +345,16 @@ class Record < ApplicationRecord
     logic_common_cost("接待交際費")
   end
 
+  def logic_greetings_expenses
+    logic_common_cost("接待交際費")
+  end
+
+  def logic_entertainment_expenses
+    logic_common_cost("接待交際費")
+  end
+
   def logic_insurance_premium
+    self.tax = "0"
     logic_common_cost("損害保険料")
   end
 
@@ -386,14 +395,22 @@ class Record < ApplicationRecord
   end
 
   def logic_payroll
+    self.tax = "0"
     logic_common_cost("給与賃金")
   end
 
   def logic_bonus_payment
+    self.tax = "0"
     logic_common_cost("賞与")
   end
 
   def logic_wages_payment
+    self.tax = "0"
+    logic_common_cost("雑給")
+  end
+
+  def logic_miscellaneous_pay
+    self.tax = "0"
     logic_common_cost("雑給")
   end
 
@@ -438,6 +455,7 @@ class Record < ApplicationRecord
   end
 
   def logic_interest_expense
+    self.tax = "0"
     logic_common_cost("利子割引料")
   end
 

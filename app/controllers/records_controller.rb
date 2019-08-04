@@ -56,9 +56,9 @@ class RecordsController < ApplicationController
 
   def record_params_independent # This returns hash. It lose validation status.
     permitted_params = params.require(:record).permit(
-      :account, :amount, :tax, :when, :where, :where_from, :quantity, :division, :user_id)
+      :account, :amount, :tax, :when, :where, :where_from, :quantity, :division, :user_id, :option)
     hash = permitted_params.to_h
-    division = Division.where(name: hash[:division]).find_by(user_id: session[:user_id])
+    division = Division.where(name: hash[:division]).where(disabled: nil).find_by(user_id: session[:user_id])
     account = Account.find_by(name: hash[:account])
     division ? hash[:division_id] = division.id : hash[:division_id] = nil
     account ? hash[:account_id] = account.id : hash[:account_id] = nil
