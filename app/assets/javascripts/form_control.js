@@ -17,6 +17,7 @@ document.addEventListener("turbolinks:load", function(){
   const accountTypeBox = document.getElementById("record_account");
   if (accountTypeBox){
     accountTypeBox.addEventListener('keyup', formControl, false);
+    accountTypeBox.addEventListener('input', formControl, false);
   }
   // Equip rulr checker to record_amount box
   const amountBox = document.getElementById("record_amount");
