@@ -12,9 +12,10 @@
 <%= f.label "tax", "消費税率" %>
 <p>
 <span class="hidden"><%= f.radio_button :tax, '10' %> 10%</span>
-<%= f.radio_button :tax, '8', {:checked => true} %> 8%
-<%= f.radio_button :tax, '0' %> 非課税
-<%= f.radio_button :tax, '00' %> 不課税
+<%= f.radio_button :tax, '10', {:checked => true} %> 10%
+<%= f.radio_button :tax, '8' %> 8％(軽減)
+<%= f.radio_button :tax, '0' %> 非課
+<%= f.radio_button :tax, '00' %> 不課
 </p>
 </ul>
 <ul class="inactive" id="option">

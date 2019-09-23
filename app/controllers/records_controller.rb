@@ -23,6 +23,7 @@ class RecordsController < ApplicationController
 
   def edit
     @record = Record.find_by(id: params[:id])
+    @divisions = Division.where(user_id: session[:user_id]).where(disabled: nil).order("name")
   end
 
   def update
